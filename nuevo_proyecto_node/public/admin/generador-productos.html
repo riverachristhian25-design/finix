@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generador de Productos — Pegantes Finix (uso interno)</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF; --paper-soft:#F8F6FB; --ink:#211D2B; --body-c:#5C5668; --steel-dim:#8B849A;
+    --line:#E7E2F0; --brand:#4E2E85; --accent:#12822F; --radius:12px;
+    --disp:"Big Shoulders Display", sans-serif; --body:"Inter", sans-serif; --mono:"IBM Plex Mono", monospace;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper-soft); color:var(--ink); font-family:var(--body); font-size:15px; line-height:1.5; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:28px 24px 80px; }
+  h1{ font-family:var(--disp); font-weight:800; text-transform:uppercase; font-size:26px; margin:0 0 4px; }
+  h2{ font-family:var(--disp); font-weight:800; text-transform:uppercase; font-size:17px; margin:0 0 14px; color:var(--brand); }
+  .top-note{ color:var(--body-c); font-size:14px; margin-bottom:24px; max-width:760px; }
+  .panel{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; margin-bottom:22px; }
+  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+  .step{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:16px; }
+  .step b{ display:block; font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:.06em; margin-bottom:6px; }
+  .step p{ margin:0; font-size:13.5px; color:var(--body-c); }
+  label{ display:block; font-size:12.5px; font-weight:700; color:var(--ink); margin:14px 0 5px; }
+  label small{ font-weight:500; color:var(--steel-dim); text-transform:none; }
+  input[type=text], input[type=number], input[type=color], select, textarea{
+    width:100%; padding:10px 12px; border:1.5px solid var(--line); border-radius:8px; font-family:var(--body); font-size:14px; background:#fff; color:var(--ink);
+  }
+  textarea{ resize:vertical; min-height:70px; }
+  .row{ display:grid; gap:16px; }
+  .row.cols-2{ grid-template-columns:1fr 1fr; }
+  .row.cols-3{ grid-template-columns:1fr 1fr 1fr; }
+  .row.cols-4{ grid-template-columns:2fr 1fr 1fr; }
+  fieldset{ border:1px dashed var(--line); border-radius:10px; padding:14px 16px 6px; margin:18px 0 0; }
+  legend{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--steel-dim); padding:0 6px; }
+  .repeat-row{ display:grid; grid-template-columns:1fr 1fr auto; gap:10px; align-items:center; margin-bottom:8px; }
+  .repeat-row.steps-row{ grid-template-columns:1fr 2fr auto; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:999px; font-weight:700; font-size:13.5px; cursor:pointer; border:1.5px solid transparent; background:var(--ink); color:#fff; }
+  .btn:hover{ opacity:.9; }
+  .btn-primary{ background:var(--brand); }
+  .btn-accent{ background:var(--accent); }
+  .btn-ghost{ background:#fff; border-color:var(--line); color:var(--ink); }
+  .btn-danger{ background:#fff; border-color:#e3b3b3; color:#b3261e; padding:7px 12px; font-size:12px; }
+  .btn-sm{ padding:7px 12px; font-size:12px; }
+  .file-hint{ font-size:12px; color:var(--steel-dim); margin-top:4px; }
+  .toggle-row{ display:flex; align-items:center; gap:8px; margin:12px 0; }
+  .hide{ display:none !important; }
+  .catalog-list{ display:grid; gap:10px; }
+  .catalog-item{ display:flex; align-items:center; gap:14px; border:1px solid var(--line); border-radius:10px; padding:10px 14px; background:#fff; }
+  .catalog-item img{ width:44px; height:44px; object-fit:contain; background:var(--paper-soft); border-radius:6px; }
+  .catalog-item .meta{ flex:1; }
+  .catalog-item .meta b{ display:block; font-size:14px; }
+  .catalog-item .meta span{ font-size:12px; color:var(--steel-dim); }
+  .badge{ font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.05em; padding:3px 9px; border-radius:999px; background:var(--paper-soft); color:var(--body-c); }
+  .actions-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; align-items:center; }
+  .status-msg{ font-size:13.5px; padding:10px 14px; border-radius:8px; margin-top:14px; }
+  .status-msg.ok{ background:#eaf6ec; color:#12822F; }
+  .status-msg.err{ background:#fdecec; color:#b3261e; }
+  .preview-card{ width:220px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--paper-soft); }
+  .preview-card .media{ aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; padding:16px; position:relative; }
+  .preview-card .media img{ max-width:100%; max-height:100%; object-fit:contain; }
+  .preview-card .body{ padding:12px 14px 16px; background:#fff; }
+  .preview-card h4{ font-family:var(--disp); font-size:15px; margin:0 0 4px; text-transform:uppercase; }
+  .preview-card p{ font-size:12px; color:var(--body-c); margin:0; }
+  .preview-badge{ position:absolute; top:8px; left:8px; background:var(--ink); color:#fff; font-family:var(--mono); font-size:8px; text-transform:uppercase; padding:4px 8px; border-radius:999px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+    <h1>Generador de Productos</h1>
+    <button type="button" class="btn btn-ghost btn-sm" id="logoutBtn">Cerrar sesión</button>
+  </div>
+  <p class="top-note">Herramienta interna para agregar o editar productos del sitio <b>sin tocar código</b>. Llena el formulario, agrega el producto a la lista y presiona <b>"Guardar en el servidor"</b> — el cambio queda disponible al instante para todos. Esta página no se enlaza desde el sitio público y pide usuario y contraseña antes de mostrarse.</p>
+
+  <div class="steps">
+    <div class="step"><b>Paso 1</b><p>Copia las fotos del producto (frontal, derecha, izquierda) a la carpeta <code>img/</code> del sitio, y el PDF de la ficha técnica a <code>pdf/</code>.</p></div>
+    <div class="step"><b>Paso 2</b><p>Anota aquí abajo los <b>nombres exactos</b> de esos archivos (ej: <code>standard-frontal.webp</code>).</p></div>
+    <div class="step"><b>Paso 3</b><p>Completa el formulario y presiona "Agregar producto a la lista".</p></div>
+    <div class="step"><b>Paso 4</b><p>Presiona "Guardar en el servidor" — no hace falta descargar ni subir ningún archivo a mano.</p></div>
+  </div>
+
+  <div class="panel">
+    <h2>Catálogo actual</h2>
+    <div id="loadStatus" class="file-hint">Cargando data/products.json…</div>
+    <div class="catalog-list" id="catalogList"></div>
+    <div class="actions-row">
+      <label style="margin:0;">
+        <span class="btn btn-ghost btn-sm">Cargar un products.json distinto</span>
+        <input type="file" id="loadJsonFile" accept="application/json" style="display:none;">
+      </label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2 id="formTitle">Agregar / editar producto</h2>
+
+    <div class="row cols-3">
+      <div>
+        <label>Nombre para mostrar <small>(ej: Finix Standard)</small></label>
+        <input type="text" id="f_displayName" placeholder="Finix Standard">
+      </div>
+      <div>
+        <label>Identificador único <small>(se genera solo, no usa tildes ni espacios)</small></label>
+        <input type="text" id="f_id" placeholder="standard">
+      </div>
+      <div>
+        <label>Color de acento</label>
+        <input type="color" id="f_color" value="#12822F">
+      </div>
+    </div>
+
+    <div class="row cols-3">
+      <div>
+        <label>Categoría</label>
+        <select id="f_cat">
+          <option value="adhesivo">Adhesivo</option>
+          <option value="recubrimiento">Recubrimiento</option>
+          <option value="complementario">Complementario</option>
+        </select>
+      </div>
+      <div>
+        <label>Estado</label>
+        <select id="f_status">
+          <option value="activo">Activo (tiene ficha técnica completa)</option>
+          <option value="proximamente">Próximamente (solo aparece con foto y nombre)</option>
+          <option value="consultar">Consultar (enlaza a WhatsApp, sin página propia)</option>
+        </select>
+      </div>
+      <div id="wrap_contactLink">
+        <label>Enlace de contacto <small>(para estado "Consultar")</small></label>
+        <input type="text" id="f_contactLink" placeholder="https://wa.me/593982665958">
+      </div>
+    </div>
+
+    <label>Descripción corta para la tarjeta <small>(se ve en la página de Productos)</small></label>
+    <input type="text" id="f_short" placeholder="Pegante monocomponente para Cerámica">
+
+    <fieldset>
+      <legend>Fotos del producto</legend>
+      <div class="row cols-3">
+        <div>
+          <label>Foto frontal — nombre de archivo <small>(irá en img/)</small></label>
+          <input type="text" id="f_img_frontal" placeholder="standard-frontal.webp">
+          <input type="file" accept="image/*" data-preview="prev_frontal" data-target="f_img_frontal" style="margin-top:6px;">
+          <img id="prev_frontal" style="display:none;max-width:80px;margin-top:6px;border-radius:6px;">
+        </div>
+        <div>
+          <label>Foto derecha — nombre de archivo</label>
+          <input type="text" id="f_img_derecha" placeholder="standard-derecha.webp">
+          <input type="file" accept="image/*" data-preview="prev_derecha" data-target="f_img_derecha" style="margin-top:6px;">
+          <img id="prev_derecha" style="display:none;max-width:80px;margin-top:6px;border-radius:6px;">
+        </div>
+        <div>
+          <label>Foto izquierda — nombre de archivo</label>
+          <input type="text" id="f_img_izquierda" placeholder="standard-izquierda.webp">
+          <input type="file" accept="image/*" data-preview="prev_izquierda" data-target="f_img_izquierda" style="margin-top:6px;">
+          <img id="prev_izquierda" style="display:none;max-width:80px;margin-top:6px;border-radius:6px;">
+        </div>
+      </div>
+      <p class="file-hint">Elegir el archivo aquí solo llena el nombre y muestra una vista previa — no sube nada al servidor. Copia tú mismo el archivo real a la carpeta <code>img/</code> con ese mismo nombre.</p>
+    </fieldset>
+
+    <div id="activeOnlyFields">
+      <fieldset>
+        <legend>Encabezado de la ficha técnica</legend>
+        <div class="row cols-3">
+          <div>
+            <label>Categoría técnica <small>(ej: CERÁMICA)</small></label>
+            <input type="text" id="f_category" placeholder="CERÁMICA">
+          </div>
+          <div>
+            <label>Frase corta <small>(ej: Cerámica en interiores)</small></label>
+            <input type="text" id="f_tagline" placeholder="Cerámica en interiores">
+          </div>
+          <div>
+            <label>Prefijo del título <small>(deja vacío para recubrimientos)</small></label>
+            <input type="text" id="f_heroPrefix" placeholder="PEGANTE">
+          </div>
+        </div>
+        <label>Título grande de la página <small>(ej: FINIX STANDARD)</small></label>
+        <input type="text" id="f_heroTitle" placeholder="FINIX STANDARD">
+        <label>Subtítulo</label>
+        <input type="text" id="f_heroSub" placeholder="Mortero adhesivo monocomponente para Cerámicas en Interiores">
+        <label>Línea de norma <small>(en mayúsculas, como se ve en el sitio)</small></label>
+        <input type="text" id="f_normLine" placeholder="CUMPLE NORMA ISO 13007 · CLASIFICACIÓN C1">
+      </fieldset>
+
+      <fieldset>
+        <legend>Descripción y normas</legend>
+        <label>Descripción larga <small>(puedes usar &lt;b&gt;texto&lt;/b&gt; para negritas)</small></label>
+        <textarea id="f_desc" placeholder="Finix Standard es un mortero adhesivo..."></textarea>
+        <div class="row cols-2">
+          <div>
+            <label>Norma (texto interno)</label>
+            <input type="text" id="f_norm" placeholder="C1 · ANSI A118.1">
+          </div>
+          <div>
+            <label>Norma (insignia visible)</label>
+            <input type="text" id="f_normBadge" placeholder="ISO 13007">
+          </div>
+        </div>
+        <label>Uso recomendado <small>(una frase)</small></label>
+        <input type="text" id="f_use" placeholder="Cerámica y azulejos (absorción >6%)">
+      </fieldset>
+
+      <fieldset>
+        <legend>Presentaciones</legend>
+        <div id="formatsRows"></div>
+        <button type="button" class="btn btn-ghost btn-sm" id="addFormatRow">+ Agregar presentación</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Rendimiento</legend>
+        <div class="toggle-row">
+          <input type="checkbox" id="f_useYieldTable">
+          <label style="margin:0;">Usar tabla por espesor (para morteros como el Enlucido)</label>
+        </div>
+        <div id="yieldListWrap">
+          <label>Lista de rendimiento <small>(una línea por ítem)</small></label>
+          <textarea id="f_yieldList" placeholder="Aproximadamente 3,5 m² por cada 25 kg"></textarea>
+        </div>
+        <div id="yieldTableWrap" class="hide">
+          <label>Tabla espesor → rendimiento <small>(una fila por línea, formato: espesor | rendimiento)</small></label>
+          <textarea id="f_yieldTable" placeholder="3 mm | 6,0 a 7,5 m²&#10;5 mm | 4,0 a 4,4 m²"></textarea>
+        </div>
+        <div class="row cols-2">
+          <div>
+            <label>Adherencia (28 días)</label>
+            <input type="text" id="f_bond" placeholder="≥0,5 MPa">
+          </div>
+          <div>
+            <label>Tiempo abierto</label>
+            <input type="text" id="f_open" placeholder="20 min">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ficha técnica en PDF</legend>
+        <label>Nombre del archivo PDF <small>(irá en pdf/)</small></label>
+        <input type="text" id="f_pdf" placeholder="FichaTecnica-Finix-Standard.pdf">
+        <input type="file" accept="application/pdf" data-target-pdf="f_pdf" style="margin-top:6px;">
+      </fieldset>
+
+      <fieldset>
+        <legend>Beneficios, usos y superficies</legend>
+        <label>Beneficios <small>(una línea por ítem)</small></label>
+        <textarea id="f_beneficios" placeholder="Excelente adherencia&#10;Duradero y resistente"></textarea>
+        <label>Usos recomendados <small>(una línea por ítem)</small></label>
+        <textarea id="f_usos" placeholder="Cerámica para pisos hasta 45×45 cm..."></textarea>
+        <label>Superficies recomendadas <small>(una línea por ítem)</small></label>
+        <textarea id="f_superficies" placeholder="Bloque&#10;Concreto&#10;Hormigón"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Pasos de uso</legend>
+        <div id="pasosRows"></div>
+        <button type="button" class="btn btn-ghost btn-sm" id="addPasoRow">+ Agregar paso</button>
+      </fieldset>
+    </div>
+
+    <div class="actions-row">
+      <button type="button" class="btn btn-accent" id="saveProductBtn">Agregar producto a la lista</button>
+      <button type="button" class="btn btn-ghost" id="clearFormBtn">Limpiar formulario</button>
+    </div>
+    <div id="formStatus"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Vista previa de la tarjeta</h2>
+    <div class="preview-card" id="previewCard">
+      <div class="media"><img id="previewImg" src="" alt=""></div>
+      <div class="body"><h4 id="previewName">—</h4><p id="previewShort">—</p></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Guardar catálogo actualizado</h2>
+    <p class="top-note" style="margin-bottom:14px;">Guarda los cambios directamente en el servidor — se aplican al instante, sin subir archivos a mano. El botón de descarga queda como respaldo por si necesitas el archivo.</p>
+    <div class="actions-row">
+      <button type="button" class="btn btn-primary" id="saveServerBtn">Guardar en el servidor</button>
+      <button type="button" class="btn btn-ghost" id="downloadJsonBtn">Descargar products.json (respaldo)</button>
+    </div>
+    <div id="saveServerStatus"></div>
+  </div>
+
+</div>
+
+<script>
+let CATALOG = [];
+let editingId = null;
+
+const $ = (id) => document.getElementById(id);
+
+function slugify(s){
+  return (s||'').toString().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+}
+
+/* ---------- load current catalog ---------- */
+function loadFromJson(json){
+  CATALOG = (json.products || []);
+  renderCatalogList();
+  $('loadStatus').textContent = `Catálogo cargado: ${CATALOG.length} productos.`;
+}
+
+fetch('../data/products.json')
+  .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(loadFromJson)
+  .catch(err => {
+    $('loadStatus').innerHTML = 'No se pudo cargar automáticamente data/products.json ('+err.message+'). Usa el botón "Cargar un products.json distinto" para seleccionarlo manualmente, o simplemente empieza a agregar productos desde cero.';
+    CATALOG = [];
+  });
+
+$('loadJsonFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const json = JSON.parse(reader.result);
+      loadFromJson(json);
+    }catch(err){
+      alert('Ese archivo no es un JSON válido: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+});
+
+function renderCatalogList(){
+  const list = $('catalogList');
+  if(!CATALOG.length){ list.innerHTML = '<p class="file-hint">Aún no hay productos cargados.</p>'; return; }
+  list.innerHTML = CATALOG.map(p => {
+    const img = (p.images && (p.images.frontal || Object.values(p.images)[0])) || '';
+    return `<div class="catalog-item">
+      <img src="../${img}" onerror="this.style.opacity=0.2">
+      <div class="meta"><b>${p.displayName || p.name}</b><span>${p.cat} · ${p.status}</span></div>
+      <span class="badge">${p.id}</span>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="editProduct('${p.id}')">Editar</button>
+      <button type="button" class="btn btn-danger" onclick="deleteProduct('${p.id}')">Eliminar</button>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- repeatable rows: formats ---------- */
+function addFormatRow(value='', unit=''){
+  const row = document.createElement('div');
+  row.className = 'repeat-row';
+  row.innerHTML = `
+    <input type="text" placeholder="25" class="fmt-value" value="${value}">
+    <input type="text" placeholder="KG" class="fmt-unit" value="${unit}">
+    <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">Quitar</button>`;
+  $('formatsRows').appendChild(row);
+}
+$('addFormatRow').addEventListener('click', () => addFormatRow());
+
+/* ---------- repeatable rows: pasos ---------- */
+function addPasoRow(title='', desc=''){
+  const row = document.createElement('div');
+  row.className = 'repeat-row steps-row';
+  row.innerHTML = `
+    <input type="text" placeholder="Título (ej: Añada)" class="paso-title" value="${title.replace(/"/g,'&quot;')}">
+    <input type="text" placeholder="Descripción del paso" class="paso-desc" value="${desc.replace(/"/g,'&quot;')}">
+    <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">Quitar</button>`;
+  $('pasosRows').appendChild(row);
+}
+$('addPasoRow').addEventListener('click', () => addPasoRow());
+
+/* ---------- toggle yield list vs table ---------- */
+$('f_useYieldTable').addEventListener('change', (e) => {
+  $('yieldListWrap').classList.toggle('hide', e.target.checked);
+  $('yieldTableWrap').classList.toggle('hide', !e.target.checked);
+});
+
+/* ---------- show/hide sections based on estado ---------- */
+function updateStatusVisibility(){
+  const status = $('f_status').value;
+  $('activeOnlyFields').classList.toggle('hide', status !== 'activo');
+  $('wrap_contactLink').classList.toggle('hide', status !== 'consultar');
+}
+$('f_status').addEventListener('change', updateStatusVisibility);
+updateStatusVisibility();
+
+/* ---------- auto-slug id from display name (only while adding new) ---------- */
+$('f_displayName').addEventListener('input', () => {
+  if(editingId) return;
+  $('f_id').value = slugify($('f_displayName').value.replace(/^finix\s+/i,''));
+});
+
+/* ---------- file pickers: just capture filename + local preview ---------- */
+document.querySelectorAll('input[type=file][data-preview]').forEach(inp => {
+  inp.addEventListener('change', () => {
+    const file = inp.files[0];
+    if(!file) return;
+    $(inp.dataset.target).value = file.name;
+    const img = $(inp.dataset.preview);
+    img.src = URL.createObjectURL(file);
+    img.style.display = 'block';
+    updatePreview();
+  });
+});
+document.querySelectorAll('input[type=file][data-target-pdf]').forEach(inp => {
+  inp.addEventListener('change', () => {
+    const file = inp.files[0];
+    if(!file) return;
+    $(inp.dataset.targetPdf).value = file.name;
+  });
+});
+
+/* ---------- live card preview ---------- */
+function updatePreview(){
+  const name = $('f_displayName').value || '—';
+  const short = $('f_short').value || '—';
+  const img = $('f_img_frontal').value;
+  $('previewName').textContent = name;
+  $('previewShort').textContent = short;
+  $('previewImg').src = img ? ('../img/' + img) : '';
+}
+['f_displayName','f_short','f_img_frontal'].forEach(id => $(id).addEventListener('input', updatePreview));
+
+/* ---------- collect form into a product object ---------- */
+function collectForm(){
+  const id = $('f_id').value.trim() || slugify($('f_displayName').value);
+  const status = $('f_status').value;
+  const cat = $('f_cat').value;
+
+  const images = {};
+  if($('f_img_frontal').value) images.frontal = 'img/' + $('f_img_frontal').value.replace(/^img\//,'');
+  if($('f_img_derecha').value) images.derecha = 'img/' + $('f_img_derecha').value.replace(/^img\//,'');
+  if($('f_img_izquierda').value) images.izquierda = 'img/' + $('f_img_izquierda').value.replace(/^img\//,'');
+
+  const product = {
+    id,
+    status,
+    cat,
+    name: (document.getElementById('f_heroTitle').value || $('f_displayName').value).replace(/^finix\s+/i,'').toUpperCase() || $('f_displayName').value.toUpperCase(),
+    displayName: $('f_displayName').value.trim(),
+    color: $('f_color').value,
+    short: $('f_short').value.trim(),
+    images,
+  };
+
+  if(status === 'consultar' && $('f_contactLink').value.trim()){
+    product.contactLink = $('f_contactLink').value.trim();
+  }
+
+  if(status === 'activo'){
+    product.category = $('f_category').value.trim();
+    product.tagline = $('f_tagline').value.trim();
+    product.heroPrefix = $('f_heroPrefix').value.trim();
+    product.heroTitle = $('f_heroTitle').value.trim();
+    product.heroSub = $('f_heroSub').value.trim();
+    product.normLine = $('f_normLine').value.trim();
+    product.desc = $('f_desc').value.trim();
+    product.norm = $('f_norm').value.trim();
+    product.normBadge = $('f_normBadge').value.trim();
+    product.use = $('f_use').value.trim();
+
+    product.formats = Array.from(document.querySelectorAll('#formatsRows .repeat-row')).map(r => ({
+      value: r.querySelector('.fmt-value').value.trim(),
+      unit: r.querySelector('.fmt-unit').value.trim(),
+    })).filter(f => f.value || f.unit);
+
+    if($('f_useYieldTable').checked){
+      product.yieldTable = $('f_yieldTable').value.split('\n').map(l => l.trim()).filter(Boolean).map(line => {
+        const [espesor, rendimiento] = line.split('|').map(s => (s||'').trim());
+        return { espesor, rendimiento };
+      });
+    } else {
+      product.yieldList = $('f_yieldList').value.split('\n').map(l => l.trim()).filter(Boolean);
+    }
+
+    product.bond = $('f_bond').value.trim();
+    product.open = $('f_open').value.trim();
+    product.pdf = 'pdf/' + $('f_pdf').value.replace(/^pdf\//,'').trim();
+
+    product.beneficios = $('f_beneficios').value.split('\n').map(l => l.trim()).filter(Boolean);
+    product.usos = $('f_usos').value.split('\n').map(l => l.trim()).filter(Boolean);
+    product.superficies = $('f_superficies').value.split('\n').map(l => l.trim()).filter(Boolean);
+
+    product.pasos = Array.from(document.querySelectorAll('#pasosRows .repeat-row')).map(r => ({
+      title: r.querySelector('.paso-title').value.trim(),
+      desc: r.querySelector('.paso-desc').value.trim(),
+    })).filter(s => s.title || s.desc);
+  }
+
+  return product;
+}
+
+function showStatus(msg, ok){
+  const el = $('formStatus');
+  el.className = 'status-msg ' + (ok ? 'ok' : 'err');
+  el.textContent = msg;
+  setTimeout(() => { el.textContent=''; el.className=''; }, 6000);
+}
+
+$('saveProductBtn').addEventListener('click', () => {
+  const p = collectForm();
+  if(!p.id || !p.displayName){ showStatus('Falta el nombre o el identificador del producto.', false); return; }
+  if(!p.short){ showStatus('Falta la descripción corta para la tarjeta.', false); return; }
+  if(p.status === 'activo' && (!p.images.frontal || !p.pdf.replace('pdf/',''))){ showStatus('Un producto Activo necesita al menos la foto frontal y el nombre del PDF.', false); return; }
+
+  const existingIdx = CATALOG.findIndex(x => x.id === p.id);
+  if(existingIdx >= 0) CATALOG[existingIdx] = p; else CATALOG.push(p);
+
+  renderCatalogList();
+  showStatus(existingIdx >= 0 ? `Producto "${p.displayName}" actualizado en la lista.` : `Producto "${p.displayName}" agregado a la lista. No olvides descargar el products.json al final.`, true);
+  clearForm();
+});
+
+function clearForm(){
+  editingId = null;
+  $('formTitle').textContent = 'Agregar / editar producto';
+  document.querySelectorAll('.panel input[type=text], .panel textarea').forEach(i => i.value = '');
+  $('f_color').value = '#12822F';
+  $('f_status').value = 'activo';
+  $('f_cat').value = 'adhesivo';
+  $('f_useYieldTable').checked = false;
+  $('yieldListWrap').classList.remove('hide');
+  $('yieldTableWrap').classList.add('hide');
+  $('formatsRows').innerHTML=''; addFormatRow();
+  $('pasosRows').innerHTML=''; addPasoRow(); addPasoRow(); addPasoRow();
+  ['prev_frontal','prev_derecha','prev_izquierda'].forEach(id => { $(id).style.display='none'; });
+  updateStatusVisibility();
+  updatePreview();
+}
+$('clearFormBtn').addEventListener('click', clearForm);
+
+window.editProduct = function(id){
+  const p = CATALOG.find(x => x.id === id);
+  if(!p) return;
+  editingId = id;
+  $('formTitle').textContent = 'Editando: ' + (p.displayName || p.id);
+  $('f_displayName').value = p.displayName || '';
+  $('f_id').value = p.id || '';
+  $('f_color').value = p.color || '#12822F';
+  $('f_cat').value = p.cat || 'adhesivo';
+  $('f_status').value = p.status || 'activo';
+  $('f_contactLink').value = p.contactLink || '';
+  $('f_short').value = p.short || '';
+  $('f_img_frontal').value = (p.images && p.images.frontal || '').replace(/^img\//,'');
+  $('f_img_derecha').value = (p.images && p.images.derecha || '').replace(/^img\//,'');
+  $('f_img_izquierda').value = (p.images && p.images.izquierda || '').replace(/^img\//,'');
+
+  $('f_category').value = p.category || '';
+  $('f_tagline').value = p.tagline || '';
+  $('f_heroPrefix').value = p.heroPrefix || '';
+  $('f_heroTitle').value = p.heroTitle || '';
+  $('f_heroSub').value = p.heroSub || '';
+  $('f_normLine').value = p.normLine || '';
+  $('f_desc').value = p.desc || '';
+  $('f_norm').value = p.norm || '';
+  $('f_normBadge').value = p.normBadge || '';
+  $('f_use').value = p.use || '';
+  $('f_bond').value = p.bond || '';
+  $('f_open').value = p.open || '';
+  $('f_pdf').value = (p.pdf || '').replace(/^pdf\//,'');
+  $('f_beneficios').value = (p.beneficios || []).join('\n');
+  $('f_usos').value = (p.usos || []).join('\n');
+  $('f_superficies').value = (p.superficies || []).join('\n');
+
+  $('formatsRows').innerHTML = '';
+  (p.formats && p.formats.length ? p.formats : [{value:'',unit:''}]).forEach(f => addFormatRow(f.value, f.unit));
+
+  $('pasosRows').innerHTML = '';
+  (p.pasos && p.pasos.length ? p.pasos : [{},{},{}]).forEach(s => addPasoRow(s.title||'', s.desc||''));
+
+  if(p.yieldTable && p.yieldTable.length){
+    $('f_useYieldTable').checked = true;
+    $('yieldListWrap').classList.add('hide');
+    $('yieldTableWrap').classList.remove('hide');
+    $('f_yieldTable').value = p.yieldTable.map(r => `${r.espesor} | ${r.rendimiento}`).join('\n');
+  } else {
+    $('f_useYieldTable').checked = false;
+    $('yieldListWrap').classList.remove('hide');
+    $('yieldTableWrap').classList.add('hide');
+    $('f_yieldList').value = (p.yieldList || []).join('\n');
+  }
+
+  updateStatusVisibility();
+  updatePreview();
+  window.scrollTo({top: document.querySelector('h2#formTitle').offsetTop - 20, behavior:'smooth'});
+};
+
+window.deleteProduct = function(id){
+  const p = CATALOG.find(x => x.id === id);
+  if(!p) return;
+  if(!confirm(`¿Eliminar "${p.displayName || p.id}" de la lista? (Esto solo afecta el archivo que vas a descargar, no borra fotos ni PDFs)`)) return;
+  CATALOG = CATALOG.filter(x => x.id !== id);
+  renderCatalogList();
+};
+
+$('downloadJsonBtn').addEventListener('click', () => {
+  const out = { products: CATALOG };
+  const blob = new Blob([JSON.stringify(out, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'products.json';
+  a.click();
+});
+
+/* ---------- save to server (Node API) ---------- */
+function showServerStatus(msg, ok){
+  const el = $('saveServerStatus');
+  el.className = 'status-msg ' + (ok ? 'ok' : 'err');
+  el.textContent = msg;
+  if(ok) setTimeout(() => { el.textContent=''; el.className=''; }, 6000);
+}
+
+$('saveServerBtn').addEventListener('click', async () => {
+  $('saveServerBtn').disabled = true;
+  try{
+    const r = await fetch('/api/productos/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ products: CATALOG }),
+    });
+    const data = await r.json();
+    if(!r.ok){
+      if(r.status === 401){
+        showServerStatus('Tu sesión expiró. Vuelve a iniciar sesión.', false);
+        setTimeout(() => { window.location.href = '/admin/login.html'; }, 1500);
+        return;
+      }
+      showServerStatus(data.error || 'No se pudo guardar en el servidor.', false);
+      return;
+    }
+    showServerStatus(`Guardado en el servidor: ${data.count} productos.`, true);
+  }catch(err){
+    showServerStatus('Error de conexión: ' + err.message, false);
+  }finally{
+    $('saveServerBtn').disabled = false;
+  }
+});
+
+$('logoutBtn').addEventListener('click', async () => {
+  await fetch('/api/logout', { method: 'POST' });
+  window.location.href = '/admin/login.html';
+});
+
+/* init default rows */
+addFormatRow();
+addPasoRow(); addPasoRow(); addPasoRow();
+</script>
+</body>
+</html>

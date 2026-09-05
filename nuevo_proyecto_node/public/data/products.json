@@ -1,0 +1,513 @@
+{
+  "products": [
+    {
+      "id": "standard",
+      "status": "activo",
+      "cat": "adhesivo",
+      "name": "STANDARD",
+      "displayName": "Finix Standard",
+      "color": "#12822F",
+      "category": "CERÁMICA",
+      "tagline": "Cerámica en interiores",
+      "short": "Pegante monocomponente para Cerámica",
+      "heroPrefix": "PEGANTE",
+      "heroTitle": "FINIX STANDARD",
+      "heroSub": "Mortero adhesivo monocomponente para Cerámicas en Interiores",
+      "normLine": "CUMPLE NORMA ISO 13007 · CLASIFICACIÓN C1",
+      "desc": "<b>Finix® Standard</b> es un mortero adhesivo monocomponente formulado para la instalación de revestimientos de absorción media-alta (&gt;6%) como cerámica y azulejos, sobre superficies de hormigón y mampostería. Ideal en pisos y paredes de baños, cocinas e interiores y exteriores de tráfico liviano.",
+      "norm": "C1 · ANSI A118.1",
+      "normBadge": "ISO 13007",
+      "use": "Cerámica y azulejos (absorción >6%)",
+      "formats": [
+        {
+          "value": "25",
+          "unit": "KG"
+        },
+        {
+          "value": "100",
+          "unit": "LB"
+        }
+      ],
+      "yieldList": [
+        "Aproximadamente 3,5 m² por cada 25 kg",
+        "Aproximadamente 8,6 m² por cada 100 lb"
+      ],
+      "bond": "≥0,5 MPa",
+      "open": "20 min",
+      "images": {
+        "frontal": "img/asset-9e5b596082.webp",
+        "derecha": "img/asset-6f7f3738a8.webp",
+        "izquierda": "img/asset-224bc77135.webp"
+      },
+      "pdf": "pdf/FichaTecnica-Finix-Standard.pdf",
+      "beneficios": [
+        "Excelente adherencia",
+        "Duradero y resistente",
+        "Menor demanda de agua",
+        "Fácil preparación, solo agregue agua",
+        "Excelente consistencia y trabajabilidad",
+        "Fabricado con arena sílica limpia, de la más alta calidad",
+        "Contiene aditivos de última generación que potencian sus propiedades adherentes"
+      ],
+      "usos": [
+        "Losetas de arcilla y concreto",
+        "Cerámica para pisos hasta 45×45 cm, o hasta 2.025 cm² o con un peso de 3,52 kg",
+        "Cerámica para pared hasta 25×44 cm, o hasta máx. 1.100 cm² o con un peso de 1,38 kg"
+      ],
+      "superficies": [
+        "Bloque",
+        "Concreto",
+        "Hormigón",
+        "Mampostería"
+      ],
+      "pasos": [
+        {
+          "title": "Añada",
+          "desc": "Añada el pegante Finix al agua limpia. Mezcle hasta obtener un mortero plástico y homogéneo. Déjelo reposar de 5 a 10 minutos. Vuelva a batir antes de usar."
+        },
+        {
+          "title": "Aplique",
+          "desc": "Extienda suficiente pegante Finix con la parte lisa de la llaneta para producir una capa de mortero de un grosor adecuado. Peine el mortero en una sola dirección con la parte dentada."
+        },
+        {
+          "title": "Coloque",
+          "desc": "Coloque la pieza con un movimiento perpendicular a las estrías. Golpee suavemente con martillo de goma para una distribución uniforme. Las estrías del mortero deben mantener su forma."
+        }
+      ]
+    },
+    {
+      "id": "plus",
+      "status": "activo",
+      "cat": "adhesivo",
+      "name": "PLUS",
+      "displayName": "Finix Plus",
+      "color": "#0B4B8C",
+      "category": "CERÁMICA SOBRE CERÁMICA",
+      "tagline": "Cerámica sobre cerámica",
+      "short": "Pegante monocomponente para Cerámica sobre Cerámica",
+      "heroPrefix": "PEGANTE",
+      "heroTitle": "FINIX PLUS",
+      "heroSub": "Mortero adhesivo monocomponente para Cerámica sobre Cerámica",
+      "normLine": "CUMPLE NORMA ISO 13007 · CLASIFICACIÓN C2",
+      "desc": "<b>Finix® Plus</b> es un mortero adhesivo monocomponente modificado con polímeros de última generación, formulado para la instalación de revestimientos cerámicos de baja y media absorción (&gt;3%) sobre superficies de hormigón, mortero, mampostería o cerámica existente, en pisos y paredes de interiores o exteriores de tráfico moderado.",
+      "norm": "C2 · ANSI A118.4",
+      "normBadge": "C2 · ISO 13007",
+      "use": "Cerámica sobre cerámica (absorción >3%)",
+      "formats": [
+        {
+          "value": "25",
+          "unit": "KG"
+        },
+        {
+          "value": "100",
+          "unit": "LB"
+        }
+      ],
+      "yieldList": [
+        "Aproximadamente 3,5 m² por cada 25 kg",
+        "Aproximadamente 8,6 m² por cada 100 lb"
+      ],
+      "bond": "≥1,0 MPa",
+      "open": "20 min",
+      "images": {
+        "frontal": "img/asset-e310ca3fad.webp",
+        "derecha": "img/asset-23100e50a3.webp",
+        "izquierda": "img/asset-4c061d1c09.webp"
+      },
+      "pdf": "pdf/FichaTecnica-Finix-Plus.pdf",
+      "beneficios": [
+        "Excelente adherencia",
+        "Duradero y resistente",
+        "Menor demanda de agua",
+        "Fácil preparación, solo agregue agua",
+        "Excelente consistencia y trabajabilidad",
+        "Fabricado con arena sílica limpia, de la más alta calidad",
+        "Contiene aditivos de última generación que potencian sus propiedades adherentes"
+      ],
+      "usos": [
+        "Cerámica para pisos hasta 45×45 cm, o hasta 2.025 cm² o con un peso de 3,52 kg",
+        "Cerámica para pared hasta 25×44 cm, o hasta máx. 1.100 cm² o con un peso de 1,38 kg"
+      ],
+      "superficies": [
+        "Bloque",
+        "Concreto",
+        "Hormigón",
+        "Mampostería",
+        "Cerámica sobre cerámica"
+      ],
+      "pasos": [
+        {
+          "title": "Añada",
+          "desc": "Agregue el agua en un recipiente e incorpore poco a poco el pegante Finix hasta integrarlo por completo. Mezcle hasta obtener un mortero plástico y homogéneo. Deje reposar 5 minutos y vuelva a batir antes de usar."
+        },
+        {
+          "title": "Aplique",
+          "desc": "Extienda el pegante con la parte lisa de la llana y peine en líneas rectas con la parte dentada. No cubra más área de la que pueda revestir en 10 minutos. Para piezas mayores a 30 cm, aplique doble encolado."
+        },
+        {
+          "title": "Coloque",
+          "desc": "Coloque la pieza con un movimiento perpendicular a las estrías, alineando con separadores. Golpee suavemente con martillo de goma y retire excesos con esponja húmeda antes de que el mortero seque."
+        }
+      ]
+    },
+    {
+      "id": "super",
+      "status": "activo",
+      "cat": "adhesivo",
+      "name": "SUPER",
+      "displayName": "Finix Super",
+      "color": "#5B2E82",
+      "category": "PORCELANATO",
+      "tagline": "Porcelanato en interiores",
+      "short": "Pegante monocomponente para Porcelanato en interiores",
+      "heroPrefix": "PEGANTE",
+      "heroTitle": "FINIX SUPER",
+      "heroSub": "Mortero adhesivo monocomponente para Porcelanato y Cerámica en Interiores",
+      "normLine": "CUMPLE NORMA ISO 13007 · CLASIFICACIÓN C2E",
+      "desc": "<b>Finix® Super</b> es un mortero adhesivo monocomponente modificado con polímeros de última generación, diseñado para la instalación de porcelanato y cerámica de baja y media absorción (&lt;3%) sobre superficies de hormigón, mampostería, bloque o cerámica existente, en pisos y paredes en interiores y exteriores de tráfico moderado.",
+      "norm": "C2E · ANSI A118.4",
+      "normBadge": "C2E · ISO 13007",
+      "use": "Porcelanato y cerámica (absorción <3%)",
+      "formats": [
+        {
+          "value": "25",
+          "unit": "KG"
+        },
+        {
+          "value": "100",
+          "unit": "LB"
+        }
+      ],
+      "yieldList": [
+        "Aproximadamente 3,5 m² por cada 25 kg",
+        "Aproximadamente 8,6 m² por cada 100 lb"
+      ],
+      "bond": "≥1,0 MPa",
+      "open": "30 min (E)",
+      "images": {
+        "frontal": "img/asset-43aea72191.webp",
+        "derecha": "img/asset-dfc85e9f0d.webp",
+        "izquierda": "img/asset-ac1322da59.webp"
+      },
+      "pdf": "pdf/FichaTecnica-Finix-SUPER.pdf",
+      "beneficios": [
+        "Excelente adherencia",
+        "Duradero y resistente",
+        "Menor demanda de agua",
+        "Fácil preparación, solo agregue agua",
+        "Excelente consistencia y trabajabilidad",
+        "Fabricado con arena sílica limpia, de la más alta calidad",
+        "Contiene aditivos de última generación que potencian sus propiedades adherentes"
+      ],
+      "usos": [
+        "Porcelanato para piso de formato hasta 50×50 cm, o hasta 2.500 cm² o con un peso hasta 5,30 kg, en interiores de tráfico moderado",
+        "Porcelanato para pared de formato hasta 32×32 cm, o de 1.024 cm² con un peso de 1,86 kg, en interiores",
+        "Cerámica para pared de formato menor a 51,2×51,2 cm, o menor a 2.621 cm², o con un peso menor a 4,47 kg en interiores y exteriores"
+      ],
+      "superficies": [
+        "Bloque",
+        "Ladrillo",
+        "Cerámica",
+        "Concreto",
+        "Hormigón",
+        "Mampostería"
+      ],
+      "pasos": [
+        {
+          "title": "Añada",
+          "desc": "Agregue el agua en un recipiente e incorpore poco a poco el pegante Finix hasta integrarlo por completo. Mezcle hasta obtener un mortero plástico y homogéneo. Deje reposar 5 minutos y vuelva a batir antes de usar."
+        },
+        {
+          "title": "Aplique",
+          "desc": "Extienda el pegante con la parte lisa de la llana y peine en líneas rectas con la parte dentada. No cubra más área de la que pueda revestir en 10 minutos. Para piezas mayores a 30 cm, aplique doble encolado."
+        },
+        {
+          "title": "Coloque",
+          "desc": "Coloque la pieza con un movimiento perpendicular a las estrías, alineando con separadores. Golpee suavemente con martillo de goma y retire excesos con esponja húmeda antes de que el mortero seque."
+        }
+      ]
+    },
+    {
+      "id": "premium",
+      "status": "activo",
+      "cat": "adhesivo",
+      "name": "PREMIUM",
+      "displayName": "Finix Premium",
+      "color": "#C20510",
+      "category": "PORCELANATO DE ALTO TRÁFICO",
+      "tagline": "Porcelanato en alto tráfico",
+      "short": "Pegante monocomponente para Porcelanato en alto tráfico en interiores y exteriores",
+      "heroPrefix": "PEGANTE",
+      "heroTitle": "FINIX PREMIUM",
+      "heroSub": "Mortero adhesivo monocomponente para Porcelanato en Alto Tráfico",
+      "normLine": "CUMPLE NORMA ISO 13007 · CLASIFICACIÓN C2TE",
+      "desc": "<b>Finix® Premium</b> es un mortero adhesivo monocomponente modificado con polímeros de última generación, formulado para pegar porcelanato, piedras naturales, granito, cerámica y otras piezas de baja absorción (&lt;3%) sobre porcelanato, superficies de hormigón, mampostería, paneles cementicios y ladrillo, en interiores y exteriores, en áreas de alto tráfico.",
+      "norm": "C2TE · ANSI A118.4",
+      "normBadge": "C2TE · ISO 13007",
+      "use": "Porcelanato, piedra natural y granito",
+      "formats": [
+        {
+          "value": "25",
+          "unit": "KG"
+        },
+        {
+          "value": "100",
+          "unit": "LB"
+        }
+      ],
+      "yieldList": [
+        "Aproximadamente 3,5 m² por cada 25 kg",
+        "Aproximadamente 8,6 m² por cada 100 lb"
+      ],
+      "bond": "≥1,38 MPa",
+      "open": "30 min (E)",
+      "images": {
+        "frontal": "img/asset-e1deb8270d.webp",
+        "derecha": "img/asset-171e890216.webp",
+        "izquierda": "img/asset-ccca8c7794.webp"
+      },
+      "pdf": "pdf/FichaTecnica-Finix-PREMIUM.pdf",
+      "beneficios": [
+        "Excelente adherencia",
+        "Duradero y resistente",
+        "Deslizamiento reducido",
+        "Menor demanda de agua",
+        "Tiempo abierto extendido",
+        "Fácil preparación, solo agregue agua",
+        "Excelente consistencia y trabajabilidad",
+        "Fabricado con arena sílica limpia, de la más alta calidad",
+        "Contiene aditivos de última generación que potencian sus propiedades adherentes"
+      ],
+      "usos": [
+        "Porcelanato para pisos de alto tráfico de formato hasta 50×50 cm, o hasta 2.500 cm² o con un peso hasta 5,30 kg, en interiores y exteriores de tráfico moderado",
+        "Porcelanato para pisos de tráfico moderado de formato hasta 60×120 cm, o de 7.200 cm² con un peso de 13 kg, en interiores"
+      ],
+      "superficies": [
+        "Bloque",
+        "Ladrillo",
+        "Cerámica",
+        "Paneles de yeso",
+        "Concreto",
+        "Hormigón",
+        "Mampostería"
+      ],
+      "pasos": [
+        {
+          "title": "Añada",
+          "desc": "Agregue el agua en un recipiente e incorpore poco a poco el pegante Finix hasta integrarlo por completo. Mezcle hasta obtener un mortero plástico y homogéneo. Deje reposar 5 minutos y vuelva a batir antes de usar."
+        },
+        {
+          "title": "Aplique",
+          "desc": "Extienda el pegante con la parte lisa de la llana y peine en líneas rectas con la parte dentada. No cubra más área de la que pueda revestir en 10 minutos. Para piezas mayores a 30 cm, aplique doble encolado."
+        },
+        {
+          "title": "Coloque",
+          "desc": "Coloque la pieza con un movimiento perpendicular a las estrías, alineando con separadores. Golpee suavemente con martillo de goma y retire excesos con esponja húmeda antes de que el mortero seque."
+        }
+      ]
+    },
+    {
+      "id": "gold",
+      "status": "activo",
+      "cat": "adhesivo",
+      "name": "GOLD",
+      "displayName": "Finix Gold",
+      "color": "#CF8A0C",
+      "category": "PORCELANATO DE FORMATOS GRANDES",
+      "tagline": "Formatos grandes y extra grandes",
+      "short": "Pegante monocomponente para Porcelanato de Formato Grande y Extra Grandes",
+      "heroPrefix": "PEGANTE",
+      "heroTitle": "FINIX GOLD",
+      "heroSub": "Mortero adhesivo monocomponente para Formatos Grandes y Extra Grandes",
+      "normLine": "CUMPLE NORMA ISO 13007 · CLASIFICACIÓN C2TP1",
+      "desc": "<b>Finix® Gold</b> es un mortero adhesivo monocomponente modificado con polímeros de última generación, que mejoran la trabajabilidad, la adherencia y la resistencia al impacto, especialmente formulado para la instalación de porcelanato y cerámica de gran formato superiores a 60×60 cm sobre hormigón, mampostería, bloque, cerámica existente y madera contrachapada, en interiores y exteriores de tráfico moderado.",
+      "norm": "C2TP1 · ISO 13007",
+      "normBadge": "C2TP1 · ISO 13007",
+      "use": "Porcelanato de gran formato (hasta 75×150 cm)",
+      "formats": [
+        {
+          "value": "25",
+          "unit": "KG"
+        }
+      ],
+      "yieldList": [
+        "Aproximadamente 3,5 m² por cada 25 kg"
+      ],
+      "bond": "≥1,38 MPa",
+      "open": "20 min",
+      "images": {
+        "frontal": "img/asset-e2d256cbaa.webp",
+        "derecha": "img/asset-728dfa2a53.webp",
+        "izquierda": "img/asset-a8a8af6345.webp"
+      },
+      "pdf": "pdf/FichaTecnica-Finix-GOLD.pdf",
+      "beneficios": [
+        "Excelente adherencia",
+        "Duradero y resistente",
+        "Menor demanda de agua",
+        "Fácil preparación, solo agregue agua",
+        "Excelente consistencia y trabajabilidad",
+        "Fabricado con arena sílica limpia, de la más alta calidad",
+        "Contiene aditivos de última generación que potencian sus propiedades adherentes"
+      ],
+      "usos": [
+        "Porcelanato y cerámica para piso de formato hasta 75×150 cm, o de 11.250 cm² o con un peso de 53,18 kg, en interiores y exteriores de tráfico moderado",
+        "Porcelanato y cerámica para pared de formato hasta 60×60 cm, o de 3.600 cm² con un peso de 8,10 kg, en interiores y exteriores",
+        "Piedra natural, granito y mármol"
+      ],
+      "superficies": [
+        "Bloque",
+        "Ladrillo",
+        "Concreto",
+        "Cerámica",
+        "Paneles de yeso",
+        "Hormigón",
+        "Mampostería",
+        "Madera contrachapada"
+      ],
+      "pasos": [
+        {
+          "title": "Añada",
+          "desc": "Agregue el agua en un recipiente e incorpore poco a poco el pegante Finix hasta integrarlo por completo. Mezcle hasta obtener un mortero plástico y homogéneo. Deje reposar 5 minutos y vuelva a batir antes de usar."
+        },
+        {
+          "title": "Aplique",
+          "desc": "Extienda el pegante con la parte lisa de la llana y peine en líneas rectas con la parte dentada. No cubra más área de la que pueda revestir en 10 minutos. Para piezas mayores a 30 cm, aplique doble encolado."
+        },
+        {
+          "title": "Coloque",
+          "desc": "Coloque la pieza con un movimiento perpendicular a las estrías, alineando con separadores. Golpee suavemente con martillo de goma y retire excesos con esponja húmeda antes de que el mortero seque."
+        }
+      ]
+    },
+    {
+      "id": "enlucido",
+      "status": "activo",
+      "cat": "recubrimiento",
+      "name": "ENLUCIDO",
+      "displayName": "Finix Enlucido",
+      "color": "#9C7A4C",
+      "category": "RECUBRIMIENTO",
+      "tagline": "Enlucido y afine 2 en 1",
+      "short": "Mortero de alta resistencia para enlucir paredes en espesores de 3mm a 20 mm",
+      "heroPrefix": "",
+      "heroTitle": "FINIX ENLUCIDO",
+      "heroSub": "Mortero de Alta Resistencia para Enlucir Paredes — Sistema 2 en 1",
+      "normLine": "CUMPLE NORMA UNE-EN 1015-11 Y 998-1 · CLASIFICACIÓN GP CS IV W0",
+      "desc": "<b>Finix® Enlucido</b> es un mortero seco a base de cemento, formulado con aditivos poliméricos, diseñado para enlucir de 5 mm a 20 mm. Permite reemplazar los métodos tradicionales, ofreciendo una aplicación manual con mejor desempeño en obra.",
+      "norm": "GP CS IV · W0",
+      "normBadge": "GP CS IV W0",
+      "use": "Enlucido y afine de paredes, interiores y exteriores",
+      "formats": [
+        {
+          "value": "40",
+          "unit": "KG"
+        }
+      ],
+      "yieldTable": [
+        {
+          "espesor": "3 mm",
+          "rendimiento": "6,0 a 7,5 m²"
+        },
+        {
+          "espesor": "5 mm",
+          "rendimiento": "4,0 a 4,4 m²"
+        },
+        {
+          "espesor": "10 mm",
+          "rendimiento": "2,0 a 2,2 m²"
+        },
+        {
+          "espesor": "15 mm",
+          "rendimiento": "1,3 a 1,5 m²"
+        },
+        {
+          "espesor": "20 mm",
+          "rendimiento": "1,0 a 1,1 m²"
+        }
+      ],
+      "bond": "—",
+      "open": "—",
+      "images": {
+        "frontal": "img/asset-4b6333c65b.webp",
+        "derecha": "img/asset-dd5bc6cb88.webp",
+        "izquierda": "img/asset-5cb04fee0b.webp"
+      },
+      "pdf": "pdf/FichaTecnica-Finix-Enlucido.pdf",
+      "beneficios": [
+        "Sistema 2 en 1: permite enlucir y afinar en una sola aplicación",
+        "Formulación optimizada a base de cemento, polímeros, microfibras y aditivos especiales",
+        "Mayor ahorro en obra: almacenamiento, limpieza, rapidez y rendimiento en costos",
+        "Alta resistencia mecánica, con valores de compresión de hasta 80 kg/cm²",
+        "Alta estabilidad en aplicación vertical, evitando el descuelgue del material",
+        "Excelente adherencia al soporte, garantizando estabilidad del sistema",
+        "Refuerzo con microfibras, que reducen el fisuramiento",
+        "No se agrieta ni descuelga"
+      ],
+      "usos": [
+        "Muros de concreto (vaciado o prefabricado)",
+        "Revoques o enlucidos existentes firmes y bien adheridos",
+        "Paneles de poliestireno expandido con malla de refuerzo",
+        "Paredes de bloque de arcilla, ladrillo, pómez o concreto",
+        "Paredes en enlucidos previos de morteros cemento-arena"
+      ],
+      "superficies": [
+        "Muros de concreto",
+        "Paneles de poliestireno expandido",
+        "Bloque de arcilla o ladrillo",
+        "Bloque pómez o concreto"
+      ],
+      "pasos": [
+        {
+          "title": "Prepare",
+          "desc": "La superficie debe estar limpia, libre de polvo, grasas, ceras u otros residuos. Humedezca uniforme y ligeramente el soporte antes de aplicar, evitando encharcamientos, para mejorar la adherencia."
+        },
+        {
+          "title": "Aplique",
+          "desc": "Mezcle el producto con agua limpia hasta obtener una pasta homogénea. Deje reposar 5 minutos y vuelva a mezclar. Extienda el mortero con llana metálica en el espesor requerido, de 3 mm a 20 mm."
+        },
+        {
+          "title": "Afine",
+          "desc": "Alise la superficie con llana o esponja según el acabado deseado, liso o rugoso. Respete el tiempo de curado de 72 horas antes de aplicar empaste o pintura."
+        }
+      ]
+    },
+    {
+      "id": "formato-grande",
+      "status": "proximamente",
+      "cat": "adhesivo",
+      "name": "FORMATO GRANDE",
+      "displayName": "Finix Formato Grande",
+      "color": "#7A4FC7",
+      "short": "Pegante monocomponente para Revestimientos pesados de Formato Grande",
+      "images": {
+        "frontal": "img/asset-728dfa2a53.webp"
+      }
+    },
+    {
+      "id": "nivelador",
+      "status": "proximamente",
+      "cat": "recubrimiento",
+      "name": "NIVELADOR",
+      "displayName": "Finix Nivelador",
+      "color": "#9C7A4C",
+      "short": "PRODUCTO POR LANZARSE",
+      "images": {
+        "frontal": "img/asset-4b6333c65b.webp"
+      }
+    },
+    {
+      "id": "adhesivo-profesional",
+      "status": "consultar",
+      "cat": "complementario",
+      "name": "ADHESIVO PROFESIONAL",
+      "displayName": "Adhesivo Profesional",
+      "color": "#211D2B",
+      "short": "Pegamento Profesional para Granito, Cuarzo, Piedra Natural",
+      "images": {
+        "frontal": "img/asset-171e890216.webp"
+      },
+      "contactLink": "https://wa.me/593982665958"
+    }
+  ]
+}
