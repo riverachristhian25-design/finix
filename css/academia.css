@@ -1,0 +1,35 @@
+/* =========================================================
+   PEGANTES FINIX — academia.css
+   Styles specific to academia.html. Requires base.css.
+   ========================================================= */
+
+:root{
+  --lilac:#F0EAFA;
+  --lilac-2:#E4D9F5;
+}
+
+/* INTRO */
+.academia-hero{ padding:150px 0 70px; background:linear-gradient(180deg, var(--lilac) 0%, #fff 88%); text-align:center; position:relative; overflow:hidden; }
+.academia-hero::before{ content:""; position:absolute; inset:-10% -10%; opacity:.06; pointer-events:none; background-image:repeating-linear-gradient(-35deg, var(--brand) 0 2px, transparent 2px 220px); }
+.academia-hero .wrap{ position:relative; z-index:1; }
+.academia-hero .eyebrow{ justify-content:center; }
+.academia-hero h1{ font-size:clamp(30px,4.8vw,52px); line-height:1.05; margin:16px 0 18px; font-family:var(--disp); font-weight:800; text-transform:uppercase; }
+.academia-hero h1 em{ font-style:normal; color:var(--accent); }
+.academia-hero p{ max-width:600px; margin:0 auto; color:var(--body-c); font-size:17px; }
+
+/* GRID */
+.academia-grid-section{ padding:90px 0 100px; background:#fff; }
+.academia-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+.academia-card{ background:var(--paper-soft); border:1px solid var(--line); border-radius:var(--radius); padding:32px 26px; transition:transform .4s var(--ease), box-shadow .4s var(--ease); }
+.academia-card:hover{ transform:translateY(-8px); box-shadow:0 24px 40px -24px rgba(78,46,133,.3); }
+.academia-card .box-icon{ width:52px; height:52px; border-radius:50%; background:var(--lilac); display:flex; align-items:center; justify-content:center; margin-bottom:18px; color:var(--brand); }
+.academia-tag{ display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--brand); background:var(--lilac); padding:5px 11px; border-radius:999px; margin-bottom:12px; }
+.academia-card h3{ font-family:var(--disp); font-size:20px; margin-bottom:8px; text-transform:uppercase; }
+.academia-card p{ font-size:13.5px; color:var(--body-c); margin:0; }
+
+@media (max-width: 980px){
+  .academia-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width: 560px){
+  .academia-grid{ grid-template-columns:1fr; }
+}

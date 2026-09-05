@@ -1,0 +1,11 @@
+AuthType Basic
+AuthName "Acceso restringido - Finix"
+AuthUserFile /home/USUARIO_CPANEL/public_html/admin/.htpasswd
+Require valid-user
+
+<Files ".htpasswd">
+  Require all denied
+</Files>
+<Files ".htaccess">
+  Require all denied
+</Files>
