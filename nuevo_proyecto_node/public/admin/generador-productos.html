@@ -76,9 +76,9 @@
   <p class="top-note">Herramienta interna para agregar o editar productos del sitio <b>sin tocar código</b>. Llena el formulario, agrega el producto a la lista y presiona <b>"Guardar en el servidor"</b> — el cambio queda disponible al instante para todos. Esta página no se enlaza desde el sitio público y pide usuario y contraseña antes de mostrarse.</p>
 
   <div class="steps">
-    <div class="step"><b>Paso 1</b><p>Copia las fotos del producto (frontal, derecha, izquierda) a la carpeta <code>img/</code> del sitio, y el PDF de la ficha técnica a <code>pdf/</code>.</p></div>
-    <div class="step"><b>Paso 2</b><p>Anota aquí abajo los <b>nombres exactos</b> de esos archivos (ej: <code>standard-frontal.webp</code>).</p></div>
-    <div class="step"><b>Paso 3</b><p>Completa el formulario y presiona "Agregar producto a la lista".</p></div>
+    <div class="step"><b>Paso 1</b><p>Elige las fotos del producto (frontal, derecha, izquierda) directo desde tu computadora — se suben solas.</p></div>
+    <div class="step"><b>Paso 2</b><p>Elige el PDF de la ficha técnica — también se sube solo.</p></div>
+    <div class="step"><b>Paso 3</b><p>Completa el resto del formulario y presiona "Agregar producto a la lista".</p></div>
     <div class="step"><b>Paso 4</b><p>Presiona "Guardar en el servidor" — no hace falta descargar ni subir ningún archivo a mano.</p></div>
   </div>
 
@@ -160,7 +160,7 @@
           <img id="prev_izquierda" style="display:none;max-width:80px;margin-top:6px;border-radius:6px;">
         </div>
       </div>
-      <p class="file-hint">Elegir el archivo aquí solo llena el nombre y muestra una vista previa — no sube nada al servidor. Copia tú mismo el archivo real a la carpeta <code>img/</code> con ese mismo nombre.</p>
+      <p class="file-hint">Al elegir el archivo aquí se sube directo al servidor (carpeta <code>img/</code>) y se muestra la vista previa. Máximo 100 MB por foto, formatos PNG, JPG/JPEG, WEBP o GIF.</p>
     </fieldset>
 
     <div id="activeOnlyFields">
@@ -391,23 +391,65 @@ $('f_displayName').addEventListener('input', () => {
   $('f_id').value = slugify($('f_displayName').value.replace(/^finix\s+/i,''));
 });
 
-/* ---------- file pickers: just capture filename + local preview ---------- */
+/* ---------- file pickers: upload the real file to the server ---------- */
+let pendingUploads = 0;
+
+async function uploadFile(file, kind){
+  const fd = new FormData();
+  fd.append('file', file);
+  const r = await fetch('/api/upload?kind=' + kind, { method: 'POST', body: fd });
+  const data = await r.json();
+  if(!r.ok) throw new Error(data.error || 'No se pudo subir el archivo.');
+  return data; // { filename, path }
+}
+
 document.querySelectorAll('input[type=file][data-preview]').forEach(inp => {
-  inp.addEventListener('change', () => {
+  inp.addEventListener('change', async () => {
     const file = inp.files[0];
     if(!file) return;
-    $(inp.dataset.target).value = file.name;
+    const targetInput = $(inp.dataset.target);
     const img = $(inp.dataset.preview);
     img.src = URL.createObjectURL(file);
     img.style.display = 'block';
-    updatePreview();
+    targetInput.value = '';
+    targetInput.placeholder = 'Subiendo…';
+    targetInput.disabled = true;
+    pendingUploads++;
+    try{
+      const data = await uploadFile(file, 'img');
+      targetInput.value = data.filename;
+      img.src = '../img/' + data.filename + '?t=' + Date.now();
+      updatePreview();
+    }catch(err){
+      alert('No se pudo subir la foto: ' + err.message);
+      targetInput.value = '';
+      img.style.display = 'none';
+    }finally{
+      targetInput.disabled = false;
+      pendingUploads--;
+    }
   });
 });
+
 document.querySelectorAll('input[type=file][data-target-pdf]').forEach(inp => {
-  inp.addEventListener('change', () => {
+  inp.addEventListener('change', async () => {
     const file = inp.files[0];
     if(!file) return;
-    $(inp.dataset.targetPdf).value = file.name;
+    const targetInput = $(inp.dataset.targetPdf);
+    targetInput.value = '';
+    targetInput.placeholder = 'Subiendo…';
+    targetInput.disabled = true;
+    pendingUploads++;
+    try{
+      const data = await uploadFile(file, 'pdf');
+      targetInput.value = data.filename;
+    }catch(err){
+      alert('No se pudo subir el PDF: ' + err.message);
+      targetInput.value = '';
+    }finally{
+      targetInput.disabled = false;
+      pendingUploads--;
+    }
   });
 });
 
@@ -498,18 +540,29 @@ function showStatus(msg, ok){
   setTimeout(() => { el.textContent=''; el.className=''; }, 6000);
 }
 
-$('saveProductBtn').addEventListener('click', () => {
+function addOrUpdateFromForm(){
+  if(pendingUploads > 0) return { ok:false, msg:'Espera a que termine de subir la foto o el PDF antes de continuar.' };
+
   const p = collectForm();
-  if(!p.id || !p.displayName){ showStatus('Falta el nombre o el identificador del producto.', false); return; }
-  if(!p.short){ showStatus('Falta la descripción corta para la tarjeta.', false); return; }
-  if(p.status === 'activo' && (!p.images.frontal || !p.pdf.replace('pdf/',''))){ showStatus('Un producto Activo necesita al menos la foto frontal y el nombre del PDF.', false); return; }
+  if(!p.id || !p.displayName) return { ok:false, msg:'Falta el nombre o el identificador del producto.' };
+  if(!p.short) return { ok:false, msg:'Falta la descripción corta para la tarjeta.' };
+  if(p.status === 'activo' && (!p.images.frontal || !p.pdf.replace('pdf/',''))) return { ok:false, msg:'Un producto Activo necesita al menos la foto frontal y el nombre del PDF.' };
 
   const existingIdx = CATALOG.findIndex(x => x.id === p.id);
   if(existingIdx >= 0) CATALOG[existingIdx] = p; else CATALOG.push(p);
 
   renderCatalogList();
-  showStatus(existingIdx >= 0 ? `Producto "${p.displayName}" actualizado en la lista.` : `Producto "${p.displayName}" agregado a la lista. No olvides descargar el products.json al final.`, true);
-  clearForm();
+  return {
+    ok: true,
+    isNew: existingIdx < 0,
+    msg: existingIdx >= 0 ? `Producto "${p.displayName}" actualizado en la lista.` : `Producto "${p.displayName}" agregado a la lista.`,
+  };
+}
+
+$('saveProductBtn').addEventListener('click', () => {
+  const res = addOrUpdateFromForm();
+  showStatus(res.msg, res.ok);
+  if(res.ok) clearForm();
 });
 
 function clearForm(){
@@ -612,6 +665,16 @@ function showServerStatus(msg, ok){
 }
 
 $('saveServerBtn').addEventListener('click', async () => {
+  /* si el formulario tiene un producto sin agregar a la lista, lo agrega solo antes de guardar */
+  if($('f_displayName').value.trim() || $('f_id').value.trim()){
+    const res = addOrUpdateFromForm();
+    if(!res.ok){
+      showServerStatus('No se guardó nada: ' + res.msg, false);
+      return;
+    }
+    clearForm();
+  }
+
   $('saveServerBtn').disabled = true;
   try{
     const r = await fetch('/api/productos/save', {

@@ -508,6 +508,77 @@
         "frontal": "img/asset-171e890216.webp"
       },
       "contactLink": "https://wa.me/593982665958"
+    },
+    {
+      "id": "jhgfdsa",
+      "status": "activo",
+      "cat": "adhesivo",
+      "name": "JHGFDSA",
+      "displayName": "jhgfdsa",
+      "color": "#12822f",
+      "short": "lkjhgfdsdfghj",
+      "images": {
+        "frontal": "img/WhatsApp-Image-2026-05-10-at-1.59.08-PM.jpeg",
+        "derecha": "img/imagen.jpeg",
+        "izquierda": "img/profile.jpeg"
+      },
+      "category": "",
+      "tagline": "",
+      "heroPrefix": "",
+      "heroTitle": "",
+      "heroSub": "",
+      "normLine": "",
+      "desc": "",
+      "norm": "",
+      "normBadge": "",
+      "use": "",
+      "formats": [],
+      "yieldList": [],
+      "bond": "",
+      "open": "",
+      "pdf": "pdf/FichaTecnica-Finix-ENLUCIDO.pdf",
+      "beneficios": [],
+      "usos": [],
+      "superficies": [],
+      "pasos": []
+    },
+    {
+      "id": "holaaaa",
+      "status": "activo",
+      "cat": "adhesivo",
+      "name": "JSJSJSJSJSJ",
+      "displayName": "holaaaa",
+      "color": "#12822f",
+      "short": "super pegante pruebaaa de nuevo item",
+      "images": {
+        "frontal": "img/Gemini_Generated_Image_tcfbljtcfbljtcfb-1-.png",
+        "derecha": "img/Gemini_Generated_Image_tcfbljtcfbljtcfb.png",
+        "izquierda": "img/profile.jpeg"
+      },
+      "category": "ceramica",
+      "tagline": "canfkajdnf",
+      "heroPrefix": "pegante",
+      "heroTitle": "jsjsjsjsjsj",
+      "heroSub": "safjkadljgnaljg",
+      "normLine": "fkajsflajfdad",
+      "desc": "dgadgadgad",
+      "norm": "dagad",
+      "normBadge": "adgad",
+      "use": "adgad",
+      "formats": [
+        {
+          "value": "30",
+          "unit": "KG"
+        }
+      ],
+      "yieldList": [],
+      "bond": "",
+      "open": "",
+      "pdf": "pdf/FichaTecnica-Finix-ENLUCIDO.pdf",
+      "beneficios": [],
+      "usos": [],
+      "superficies": [],
+      "pasos": []
     }
   ]
 }

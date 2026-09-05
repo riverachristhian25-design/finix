@@ -4,10 +4,15 @@
    The thumbnails and their images live in the HTML markup
    (data-img attribute) — this script only wires up the click
    behaviour, it does not generate content.
+
+   producto-render.js draws the page asynchronously (it waits
+   on Catalog.ready()), so this cannot wait for DOMContentLoaded
+   — that event fires before the async markup exists. Instead,
+   producto-render.js calls window.initProductGallery() itself
+   right after it injects the markup.
    ========================================================= */
 
-document.addEventListener('DOMContentLoaded', () => {
-
+function initProductGallery() {
   const mainImg = document.getElementById('mainImg');
   const thumbRow = document.getElementById('thumbRow');
   if (!mainImg || !thumbRow) return;
@@ -22,5 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
       thumb.classList.add('active');
     });
   });
+}
 
-});
+window.initProductGallery = initProductGallery;

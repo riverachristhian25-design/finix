@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.title = `Pegante Finix ${p.name} — Ficha Técnica y Características`;
     main.innerHTML = productMarkup(p);
+    if (window.initProductGallery) window.initProductGallery();
   });
 });
 

@@ -5,11 +5,44 @@ const fs = require('fs');
 const express = require('express');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const PRODUCTS_FILE = path.join(PUBLIC_DIR, 'data', 'products.json');
+const IMG_DIR = path.join(PUBLIC_DIR, 'img');
+const PDF_DIR = path.join(PUBLIC_DIR, 'pdf');
+
+const MAX_UPLOAD_BYTES = 100 * 1024 * 1024; // 100 MB, pedido por el cliente
+const ALLOWED_IMAGE_TYPES = new Set(['image/png', 'image/jpeg', 'image/webp', 'image/gif']);
+const ALLOWED_PDF_TYPES = new Set(['application/pdf']);
+
+function sanitizeFilename(name) {
+  const base = path.basename(name || '').normalize('NFD').replace(/[̀-ͯ]/g, '');
+  return base.replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/-+/g, '-') || 'archivo';
+}
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, cb) {
+      const kind = req.query.kind === 'pdf' ? 'pdf' : 'img';
+      cb(null, kind === 'pdf' ? PDF_DIR : IMG_DIR);
+    },
+    filename(req, file, cb) {
+      cb(null, sanitizeFilename(file.originalname));
+    },
+  }),
+  limits: { fileSize: MAX_UPLOAD_BYTES },
+  fileFilter(req, file, cb) {
+    const kind = req.query.kind === 'pdf' ? 'pdf' : 'img';
+    const allowed = kind === 'pdf' ? ALLOWED_PDF_TYPES : ALLOWED_IMAGE_TYPES;
+    if (!allowed.has(file.mimetype)) {
+      return cb(new Error(kind === 'pdf' ? 'Solo se aceptan archivos PDF.' : 'Solo se aceptan imágenes PNG, JPG/JPEG, WEBP o GIF.'));
+    }
+    cb(null, true);
+  },
+});
 
 const ADMIN_USER = process.env.ADMIN_USER || 'finixadmin';
 const ADMIN_PASS_HASH = process.env.ADMIN_PASS_HASH || '';
@@ -100,6 +133,30 @@ app.post('/api/productos/save', requireAuth, (req, res) => {
       if (renameErr) return res.status(500).json({ error: 'No se pudo reemplazar products.json.' });
       res.json({ ok: true, count: body.products.length });
     });
+  });
+});
+
+/* ---------- subida de fotos y PDF ---------- */
+
+fs.mkdirSync(IMG_DIR, { recursive: true });
+fs.mkdirSync(PDF_DIR, { recursive: true });
+
+app.post('/api/upload', requireAuth, (req, res) => {
+  upload.single('file')(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(413).json({ error: 'El archivo supera el límite de 100 MB.' });
+      }
+      return res.status(400).json({ error: 'Error al subir el archivo: ' + err.message });
+    }
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se recibió ningún archivo.' });
+    }
+    const kind = req.query.kind === 'pdf' ? 'pdf' : 'img';
+    res.json({ ok: true, filename: req.file.filename, path: `${kind}/${req.file.filename}` });
   });
 });
 
